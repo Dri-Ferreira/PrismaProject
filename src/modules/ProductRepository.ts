@@ -14,8 +14,14 @@ export default class ProductRepository implements IProductRepository{
             }
         })
         return product
-    }
+    };
 
-   
+   async findAll(): Promise<object>{
+       return await prisma.product.findMany()
+   };
+
+   async findById(id: string): Promise<object> {
+       return await prisma.product.findMany({where: {id}});
+   }
 
 }

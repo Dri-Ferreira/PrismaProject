@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { ParamsDictionary } from 'express-serve-static-core';
+import { ParsedQs } from 'qs';
 import { IProductController, IProductService } from './structure';
 
 
@@ -23,5 +25,16 @@ export default class ProductController implements IProductController {
             res.status(409).json(product.message)
         }
         res.status(200).json(product)
+    };
+
+    async findAll(req: Request, res: Response): Promise<void>{
+        const find = await this.productService.findAll()
+        res.json(find)
+    };
+
+    async findById(req: Request, res: Response): Promise<void> {
+        const { id } = req.params;
+        const find = await this.productService.findById(id)
+        res.json(find)
     }
 }

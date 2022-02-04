@@ -16,6 +16,17 @@ export default class ProductService implements IProductService {
             bar_code
         })
         return product;
+    };
+
+    async findAll(): Promise<object> {
+        const find = await this.productRepository.findAll()
+        return find
+    };
+
+    async findById(id: string): Promise<object> {
+        const find = await this.productRepository.findById(id)
+        return find
     }
+    
 
 }

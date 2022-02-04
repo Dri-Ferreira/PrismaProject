@@ -11,4 +11,6 @@ export const ProductController = new ProductControllerclass(ProductService);
 
 export const ProductRoutes = Router()
 
-ProductRoutes.post('/', (req, res) => ProductController.create(req, res))
+ProductRoutes.post('/', (req, res) => ProductController.create(req, res));
+ProductRoutes.get('/', (req, res) => ProductController.findAll(req, res));
+ProductRoutes.get('/:id', (req, res) => ProductController.findById(req, res));
