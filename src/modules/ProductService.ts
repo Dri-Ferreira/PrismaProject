@@ -1,6 +1,5 @@
 import { IProductService, IProductRepository, IProduct } from './structure';
 
-
 export default class ProductService implements IProductService {
 
     constructor(
@@ -8,9 +7,7 @@ export default class ProductService implements IProductService {
     ){}
 
     async create(data: IProduct): Promise<object | Error> {
-        
         const { name, bar_code} = data
-
         const product = await this.productRepository.create({
             name,
             bar_code
@@ -23,7 +20,7 @@ export default class ProductService implements IProductService {
         return find
     };
 
-    async findById(id: string): Promise<object> {
+    async findById(id: string): Promise<object | Error> {
         const find = await this.productRepository.findById(id)
         return find
     }

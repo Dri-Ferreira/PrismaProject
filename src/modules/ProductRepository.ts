@@ -20,8 +20,12 @@ export default class ProductRepository implements IProductRepository{
        return await prisma.product.findMany()
    };
 
-   async findById(id: string): Promise<object> {
-       return await prisma.product.findMany({where: {id}});
+   async findById(id: string): Promise<object | Error>{
+    const findById = await prisma.product.findUnique({ where: { id } })
+    if(!findById) {
+        return new Error('Produto não encontrado!')
+    }
+    return findById
    }
 
 }
