@@ -11,7 +11,7 @@ export interface IProduct {
 export interface IProductRepository {
     create(data: IProduct): Promise<object | Error>;
     findAll(): Promise<object>
-    findById(id: string): Promise<object | Error>
+    findById(id: string): Promise <IProduct>
     update(id: string, name: string, bar_code: string): Promise<object>
     delete(id: string): Promise<object>
 }
@@ -27,7 +27,7 @@ export interface IProductController {
 export interface IProductService {
     create(data: IProduct): Promise<object | Error>
     findAll(): Promise<object>
-    findById(id: string): Promise<object | Error>
+    findById(id: string): Promise<IProduct | Error>
     update(id: string, name: string, bar_code: string): Promise<object>
     delete(id: string): Promise<object>
 }

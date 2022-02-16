@@ -21,7 +21,7 @@ export default class ProductService implements IProductService {
         return find
     };
 
-    async findById(id: string): Promise<object | Error> {
+    async findById(id: string): Promise<IProduct | Error> {
         const find = await this.productRepository.findById(id)
 
         if(!find) {

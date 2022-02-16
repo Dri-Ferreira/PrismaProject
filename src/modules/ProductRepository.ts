@@ -7,6 +7,16 @@ export default class ProductRepository implements IProductRepository {
     async create(data: IProduct): Promise<object | Error> {
         const { name, bar_code } = data
 
+        const prodcutAlreadyExists = await prisma.product.findFirst({
+            where: {
+                name:data.name,
+            }
+        });
+
+        if(prodcutAlreadyExists){
+            throw new Error("Product already exists!")
+        }
+
         const product = prisma.product.create({
             data: {
                 name, bar_code
@@ -19,8 +29,8 @@ export default class ProductRepository implements IProductRepository {
         return await prisma.product.findMany()
     };
 
-    async findById(id: string): Promise<object | any> {
-        const findById = await prisma.product.findUnique({where: {id: id}})
+    async findById(id: string):Promise<IProduct | any>{
+        const findById = await prisma.product.findFirst({where: {id: id}})
 
         return findById
     }
