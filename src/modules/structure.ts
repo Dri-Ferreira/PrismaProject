@@ -11,7 +11,7 @@ export interface IProduct {
 export interface IProductRepository {
     create(data: IProduct): Promise<object | Error>;
     findAll(): Promise<object>
-    findById(id: string): Promise <IProduct>
+    findById(id: string): Promise<IProduct>
     update(id: string, name: string, bar_code: string): Promise<object>
     delete(id: string): Promise<object>
 }
