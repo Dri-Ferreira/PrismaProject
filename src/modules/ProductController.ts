@@ -35,9 +35,9 @@ export default class ProductController implements IProductController {
         const id = req.params.id;
         const find = await this.productService.findById(id)
 
-        if(!find) {
-            res.status(402).json({ msg: 'Parẫmetro id é necessário' })
-        }
+        // if(!find) {
+        //     res.status(402).json({ msg: 'Parẫmetro id é necessário' })
+        // }
 
         res.status(200).json(find)
     }

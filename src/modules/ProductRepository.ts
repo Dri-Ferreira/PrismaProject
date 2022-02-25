@@ -3,19 +3,11 @@ import { IProduct, IProductRepository } from './structure';
 
 
 export default class ProductRepository implements IProductRepository {
+    static findAll: jest.Mock<any, any>;
+    static create: jest.Mock<any, any>;
 
-    async create(data: IProduct): Promise<object | Error> {
+    async create(data: IProduct): Promise<any> {
         const { name, bar_code } = data
-
-        const prodcutAlreadyExists = await prisma.product.findFirst({
-            where: {
-                name:data.name,
-            }
-        });
-
-        if(prodcutAlreadyExists){
-            throw new Error("Product already exists!")
-        }
 
         const product = prisma.product.create({
             data: {
@@ -29,10 +21,9 @@ export default class ProductRepository implements IProductRepository {
         return await prisma.product.findMany()
     };
 
-    async findById(id: string):Promise<IProduct | any>{
-        const findById = await prisma.product.findFirst({where: {id: id}})
+    async findById(name: string):Promise<any>{
+        return await prisma.product.findFirst({where: { name } })
 
-        return findById
     }
 
     async update(id: string, name: string, bar_code: string): Promise<object> {

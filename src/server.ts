@@ -6,12 +6,12 @@ const app = express()
 app.use(express.json())
 app.use(routes)
 
-app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
-    return response.json({
-        status: "Error",
-        message: error.message
-    })
-})
+// app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
+//     return response.json({
+//         status: "Error",
+//         message: error.message
+//     })
+// })
 
 
 app.listen(4000,()=>console.log("Server is running!"))

@@ -1,13 +1,27 @@
+import { prisma } from '../../PrismaClient';
 import { IProductService, IProductRepository, IProduct } from './structure';
 
 export default class ProductService implements IProductService {
+    static findAll(id: string) {
+        throw new Error('Method not implemented.');
+    }
 
     constructor(
         private productRepository: IProductRepository
     ) { }
 
-    async create(data: IProduct): Promise<object | Error> {
+    async create(data: IProduct): Promise<any> {
         const { name, bar_code } = data
+
+        const prodcutAlreadyExists = await prisma.product.findFirst({
+            where: {
+                name:data.name,
+            }
+        });
+
+        if(prodcutAlreadyExists){
+            return Error("Product already exists!")
+        }
 
         const product = await this.productRepository.create({
             name,
@@ -21,8 +35,9 @@ export default class ProductService implements IProductService {
         return find
     };
 
-    async findById(id: string): Promise<IProduct | Error> {
-        const find = await this.productRepository.findById(id)
+    async findById(name: string): Promise<any> {
+
+        const find = await this.productRepository.findById(name)
 
         if(!find) {
             return Error('Produto não encontrado!')

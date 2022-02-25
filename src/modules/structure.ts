@@ -9,9 +9,9 @@ export interface IProduct {
 };
 
 export interface IProductRepository {
-    create(data: IProduct): Promise<object | Error>;
+    create(data: IProduct): Promise<any>;
     findAll(): Promise<object>
-    findById(id: string): Promise<IProduct>
+    findById(name: string): Promise<any>
     update(id: string, name: string, bar_code: string): Promise<object>
     delete(id: string): Promise<object>
 }
@@ -25,9 +25,9 @@ export interface IProductController {
 }
 
 export interface IProductService {
-    create(data: IProduct): Promise<object | Error>
+    create(data: IProduct): Promise<any>
     findAll(): Promise<object>
-    findById(id: string): Promise<IProduct | Error>
+    findById(name: string): Promise<any>
     update(id: string, name: string, bar_code: string): Promise<object>
     delete(id: string): Promise<object>
 }
